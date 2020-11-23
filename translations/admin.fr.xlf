@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="obqwxmC" resname="action_configure">
+        <source>action_configure</source>
+        <target>Configurer</target>
+      </trans-unit>
+      <trans-unit id="wuazoPS" resname="title_configure">
+        <source>title_configure</source>
+        <target>Configurer "%name%"</target>
+      </trans-unit>
+      <trans-unit id="IbERy.5" resname="Default">
+        <source>Default</source>
+        <target>Par défaut</target>
+      </trans-unit>
+      <trans-unit id="4j4ENWi" resname="Families">
+        <source>Families</source>
+        <target>Famillies</target>
+      </trans-unit>
+      <trans-unit id="vS1ney7" resname="Family">
+        <source>Family</source>
+        <target>Famille</target>
+      </trans-unit>
+      <trans-unit id="okCzI97" resname="Entities List">
+        <source>Entities List</source>
+        <target>Liste entités</target>
+      </trans-unit>
+      <trans-unit id="f9s8zsD" resname="Entities">
+        <source>Entities</source>
+        <target>Entités</target>
+      </trans-unit>
+      <trans-unit id="LtO7YMm" resname="Entity">
+        <source>Entity</source>
+        <target>Entité</target>
+      </trans-unit>
+      <trans-unit id="byAvVKe" resname="List">
+        <source>List</source>
+        <target>Liste</target>
+      </trans-unit>
+      <trans-unit id="ZG.UjGF" resname="Configure Families">
+        <source>Configure Families</source>
+        <target>Configurer familles</target>
+      </trans-unit>
+      <trans-unit id="EwARdWE" resname="On">
+        <source>On</source>
+        <target>Activé</target>
+      </trans-unit>
+      <trans-unit id="ynmBtG7" resname="Off">
+        <source>Off</source>
+        <target>Désactivé</target>
+      </trans-unit>
+      <trans-unit id="aDWGGkt" resname="Show logo">
+        <source>Show logo</source>
+        <target>Afficher le logo</target>
+      </trans-unit>
+      <trans-unit id="3erVdNB" resname="__action_configure">
+        <source>__action_configure</source>
+        <target>Configurer</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

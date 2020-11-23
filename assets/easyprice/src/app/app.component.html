@@ -1,0 +1,47 @@
+<nav class="navbar navbar-light bg-light mb-5">
+  <a class="navbar-brand" href="#">
+    <img src="img/menu-logo.png" style="max-height: 30px;" *ngIf="(settings | async)['ui_show_logo']"/>
+    EasyPrice
+  </a>
+</nav>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6>Recherche</h6>
+          <app-model-search-box [updateModel]="updateModel"></app-model-search-box>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-5" *ngIf="(settings | async)['ui_show_search_summary_bloc']">
+    <div class="col-md-8 offset-md-2">
+      <h6 class="text-center">Informations prix EasyCash</h6>
+      <div class="card shadow-sm">
+        <app-price-information-summary [model]="model" [settings]="settings.asObservable()"></app-price-information-summary>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="(settings | async)['ui_show_search_details_bloc']">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Modèle</th>
+                    <th>Grade</th>
+                    <th>Magasin</th>
+                    <th>Achat</th>
+                    <th>Prix Achat</th>
+                    <th>Vente</th>
+                    <th>Prix Vente</th>
+                    <th>Marge %</th>
+                    <th>Délai</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,11 @@
+/**
+ * Coffee & Brackets software studio
+ * @author Mohamed KRISTOU <krisstwo@gmail.com>.
+ */
+header:before {
+    background-color: #d3081b;
+}
+
+#swagger-ui.api-platform .info .title {
+    color: #d3081b;
+}

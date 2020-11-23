@@ -1,0 +1,7 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+{% block body_attributes -%}
+    class="sonata-bc skin-red fixed
+    {% if app.request.cookies.get('sonata_sidebar_hide') -%}
+        sidebar-collapse
+    {%- endif -%}"
+{%- endblock -%}

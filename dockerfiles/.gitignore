@@ -1,0 +1,8 @@
+logs/*
+!logs/.gitkeep
+
+data/*
+!data/.gitkeep
+
+docker-compose.override.yml
+.env

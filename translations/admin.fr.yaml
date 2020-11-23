@@ -1,0 +1,29 @@
+action_configure: Configurer
+title_configure: Configurer "%name%"
+
+action_regenerateSecret: Regén. secret
+Regenerate Secret: Regénérer secret
+flash_batch_regenerate_secret_error: Une erreur est survenue lors de la regénération des secrets "%error%"
+flash_batch_regenerate_secret_success: Secrets regénérés avec succès
+
+action_generateWebUrl: Accès web
+
+Default Configuration: Configuration par défaut
+Default: Par défaut
+Default Configuration List: Configuration par défaut
+Default Configuration Configure: Configurer
+Families List: Liste famillies
+Families: Familles
+Family: Famille
+Structures List: Liste structures
+Configure Structures: Configurer structures
+Entities List: Liste entités
+Entities: Entités
+Entity: Entité
+List: Liste
+Configure Families: Configurer familles
+On: Activé
+Off: Désactivé
+Show logo: Afficher le logo
+area.Default: API clients
+area.Internal: API interne

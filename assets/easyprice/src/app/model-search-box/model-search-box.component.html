@@ -1,0 +1,30 @@
+<ng-template #resultTemplate let-r="result" let-t="term">
+  <ngb-highlight [result]="r.id + ' ' + r.lib_model" [term]="t"></ngb-highlight>
+</ng-template>
+<div class="form-group">
+  <div class="input-group">
+    <input #input #instance="ngbTypeahead" type="text" class="form-control form-control-lg" [class.is-invalid]="searchFailed"
+         [editable]="false"
+         [focusFirst]="false"
+         [showHint]="true"
+         [(ngModel)]="model"
+         (selectItem)="selectItem($event)"
+         (focus)="focus$.next($event.target.value)"
+         (click)="click$.next($event.target.value)"
+         [ngbTypeahead]="search" [resultTemplate]="resultTemplate"
+         [inputFormatter]="formatter" placeholder="num article / libellé / codebarre"/>
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="exclude" [(ngModel)]="exclude">
+          <label class="form-check-label" for="exclude">
+            Exclure livres, dvd et Blu-Ray
+          </label>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  <span class="badge badge-pill badge-warning mt-1" *ngIf="searching">Recherche en cours...</span>
+  <div class="invalid-feedback" *ngIf="searchFailed">Une erreur est survenue lors de la recherche.</div>
+</div>

@@ -1,0 +1,116 @@
+version: "3"
+
+services:
+  webserver:
+    build:
+      context: ./bin/webserver
+    ports:
+      - 8888:8888
+    volumes:
+      - ..:/var/www/easy-price
+      - ./bin/webserver/site.conf:/etc/nginx/conf.d/site.conf
+      - ${LOG_DIR-./logs}/nginx:/var/log/nginx
+    depends_on:
+      - easy-price
+  easy-price:
+    build:
+      context: ./bin/easy-price
+    environment:
+      TZ: "Europe/Paris"
+      SHELL: "/bin/bash"
+    volumes:
+      - ..:/var/www/easy-price
+      - easy-price-var:/var/www/easy-price/var
+      - ./bin/easy-price/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ${LOG_DIR-./logs}/php-fpm:/var/log/php-fpm
+    command: > 
+      bash -c "chmod +x /var/www/easy-price/dockerfiles/bin/easy-price/bootstrap.sh && 
+               /var/www/easy-price/dockerfiles/bin/easy-price/bootstrap.sh"
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - node.master=true
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=es02,es03
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es01:/usr/share/elasticsearch/data:rw
+    networks:
+      - es-cluster
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es02
+    environment:
+      - node.name=es02
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=es01,es03
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es02:/usr/share/elasticsearch/data:rw
+    networks:
+      - es-cluster
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es03
+    environment:
+      - node.name=es03
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - discovery.seed_hosts=es01,es02
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es03:/usr/share/elasticsearch/data:rw
+    networks:
+      - es-cluster
+  proxy:
+    image: nginx:1.17-alpine
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./conf/reverse-proxy.conf:/etc/nginx/nginx.conf
+      - ./conf/.htpasswd:/etc/nginx/.htpasswd
+    networks:
+      - es-cluster
+  elastichq: # http://localhost:5000/#!/clusters/es-docker-cluster
+    image: elastichq/elasticsearch-hq
+    networks:
+      - es-cluster
+
+volumes:
+  es01:
+    driver: local
+  es02:
+    driver: local
+  es03:
+    driver: local
+  easy-price-var:
+    driver: local
+
+networks:
+  es-cluster:

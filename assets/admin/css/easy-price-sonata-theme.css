@@ -1,0 +1,100 @@
+/**
+ * Coffee & Brackets software studio
+ * @author Mohamed KRISTOU <krisstwo@gmail.com>.
+ *
+ * Put here theming styles only, any other misc styles are destined elsewhere
+ */
+
+body {
+    font-family: 'Open Sans', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #d3081b;
+}
+
+a:hover {
+    color: #d3081b;
+}
+
+.sonata-bc .content-wrapper {
+    background-color: #f2f2f2;
+}
+
+.sonata-bc .main-header .logo {
+    background-color: #d3081b;
+}
+
+.sonata-bc .main-header .navbar {
+    background-color: #d3081b;
+}
+
+.sonata-bc .main-sidebar {
+    background-color: #373733;
+}
+
+.sonata-bc .sidebar-menu > li > .treeview-menu {
+    background-color: #4b4b48;
+}
+
+.sonata-bc .sidebar-menu > li:hover > a {
+    background-color: #373733;
+    color: #ffffff;
+}
+
+.sonata-bc .sidebar a,
+.sonata-bc .treeview-menu > li > a {
+    color: #b3b3b3;
+}
+
+.sonata-bc .treeview-menu > li > a:hover,
+.sonata-bc .treeview-menu > li.active > a {
+    color: #ffffff;
+}
+
+.sonata-bc .sidebar ul.sidebar-menu + p.text-center.small {
+    display: none;
+}
+
+.sonata-bc .main-sidebar {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.sonata-bc .box {
+    border-top: 3px solid #d3081b;
+}
+
+.btn-link {
+    color: #d3081b;
+}
+
+.btn-link:focus, .btn-link:hover {
+    color: #d3081b;
+}
+
+.breadcrumb > .active {
+    color: #ffffff;
+}
+
+.sonata-ba-list-field-header th,
+.sonata-ba-list-field-header th > a {
+    color: #373733;
+}
+
+.sonata-ba-list-field-header th > a:hover {
+    color: #373733;
+}
+
+.icheckbox_square-blue, .iradio_square-blue {
+    background: url("../img/red.png") no-repeat;
+}
+
+.form-group .help-block {
+    font-style: italic;
+}
+
+.form-group .radio label[for$="_placeholder"] {
+    font-style: italic;
+}

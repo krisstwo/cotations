@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script type="text/javascript">
+        window.easyprice = {
+            api_base_url: '{{ api_base_url }}',
+            access_token: '{{ access_token }}',
+            options: JSON.parse('{{ options|json_encode()|raw }}')
+        };
+    </script>
+    <app-root></app-root>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/easyprice/runtime.js') }}" type="module"></script>
+    <script src="{{ asset('build/easyprice/polyfills.js') }}" type="module"></script>
+    <script src="{{ asset('build/easyprice/styles.js') }}" type="module"></script>
+    <script src="{{ asset('build/easyprice/vendor.js') }}" type="module"></script>
+    <script src="{{ asset('build/easyprice/main.js') }}" type="module"></script>
+{% endblock %}

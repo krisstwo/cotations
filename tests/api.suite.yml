@@ -1,0 +1,32 @@
+actor: ApiTester
+modules:
+    enabled:
+        - Db:
+            dsn: '%CODECEPTION_DATABASE_URL%'
+            user: ''
+            password: ''
+            cleanup: false # run populator before each test
+            populate: true # run populator before all test
+            populator: 'php bin/console doctrine:migration:migrate --no-interaction --allow-no-migration'
+#            populator: 'php bin/console doctrine:schema:drop --full-database --force && php bin/console doctrine:migration:migrate --no-interaction --allow-no-migration'
+        - Symfony:
+            app_path: 'src'
+            environment: 'test'
+#            cache_router: true
+#            debug: true
+#            rebootable_client: false
+        - REST:
+            depends: PhpBrowser
+            part: Json
+            url: '%CODECEPTION_API_BASE_URL%' # Absolute url PhpBrowser, Symfony module takes an uri ex. /api/v1
+            shortDebugResponse: 300 # only the first 300 chars of the response
+        - PhpBrowser:
+            url: '%CODECEPTION_API_BASE_URL%'
+        - Doctrine2:
+            depends: Symfony
+            cleanup: false # Do not use cleanup if using PhpBrowser as transaction would be invisible to  PhpBrowser
+        - DataFactory:
+            depends: Doctrine2
+            factories: tests/_support/factories
+            cleanup: false # Must copy Doctrine2 value as causes problems otherwhise
+        - \App\Tests\Helper\Api

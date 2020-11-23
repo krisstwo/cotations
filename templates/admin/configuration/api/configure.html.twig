@@ -1,0 +1,70 @@
+{% extends base_template %}
+
+{% block title %}
+    {# NEXT_MAJOR: remove default filter #}
+    {% if objectId|default(admin.id(object)) is not null %}
+        {{ 'title_configure'|trans({'%name%': admin.toString(object)|truncate(15) }, 'admin') }}
+    {% else %}
+        {{ 'title_configure'|trans({}, 'admin')|truncate(15) }}
+    {% endif %}
+{% endblock %}
+
+{% block navbar_title %}
+    {# NEXT_MAJOR: remove default filter #}
+    {% if objectId|default(admin.id(object)) is not null %}
+        {{ 'title_configure'|trans({'%name%': admin.toString(object)|truncate(100) }, 'admin') }}
+    {% else %}
+        {{ 'title_configure'|trans({}, 'admin')|truncate(100) }}
+    {% endif %}
+{% endblock %}
+
+{%- block actions -%}
+    {% include '@SonataAdmin/CRUD/action_buttons.html.twig' %}
+{%- endblock -%}
+
+{%- block tab_menu -%}
+    {{ knp_menu_render(admin.sidemenu(action), {
+        'currentClass': 'active',
+        'template': get_global_template('tab_menu_template')
+    }, 'twig') }}
+{%- endblock -%}
+
+{% use '@SonataAdmin/CRUD/base_edit_form.html.twig' with form as parentForm %}
+
+{% block form %}
+    <div class="sonata-ba-form">
+        {{ form_start(form) }}
+
+        {% for area in form %}
+            <div class="well well-sm">
+                <strong>{{ ('area.' ~ area.vars.label)|trans({}, 'admin') }}</strong>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    {% for path in area %}
+                        <div class="col-md-4">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h4 class="box-title">
+                                        {{ path.vars.label }}
+                                    </h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="sonata-ba-collapsed-fields">
+                                        {{ form_widget(path) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+
+        <div class="sonata-ba-form-actions well well-small form-actions">
+            <button class="btn btn-success" type="submit">Save</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

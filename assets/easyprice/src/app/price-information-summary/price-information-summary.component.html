@@ -1,0 +1,61 @@
+<div class="text-center" *ngIf="currentModel">
+  <span class="badge badge-pill badge-info">{{ currentModel.id }} - {{ currentModel.lib_model }}</span>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th *ngIf="(settings | async).search_summary_pweb">Prix visible client</th>
+      <th *ngIf="(settings | async).search_summary_pa">PA moyen</th>
+      <th *ngIf="(settings | async).search_summary_pa">PA max</th>
+      <th *ngIf="(settings | async).search_summary_pv">PV moyen</th>
+      <th *ngIf="(settings | async).search_summary_pv">PV max</th>
+      <th *ngIf="(settings | async).search_summary_stock">
+        Stock
+        <ng-container *ngIf="!isUpdatingStock && isUpdatingStockError"> <a href="javascript:void(0)" mat-icon-button (click)="refreshStock($event)" placement="top" ngbTooltip="Rafraîchir"><i class="fa fa-refresh"></i></a></ng-container>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td *ngIf="(settings | async).search_summary_pweb">{{ priceInformation['easyprice']['apweb'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['apa'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['apa_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['apv'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['apv_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_stock">
+        <i class="fa fa-circle-o-notch fa-spin text-info" *ngIf="isUpdatingStock"></i>
+        <i class="fa fa-times-circle-o text-danger" *ngIf="isUpdatingStockError"></i>
+        {{ stockInformation ? stockInformation.A : '' }}
+      </td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td *ngIf="(settings | async).search_summary_pweb">{{ priceInformation['easyprice']['bpweb'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['bpa'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['bpa_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['bpv'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['bpv_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_stock">
+        <i class="fa fa-circle-o-notch fa-spin text-info" *ngIf="isUpdatingStock"></i>
+        <i class="fa fa-times-circle-o text-danger" *ngIf="isUpdatingStockError"></i>
+        {{ stockInformation ? stockInformation.B : '' }}
+      </td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td *ngIf="(settings | async).search_summary_pweb">{{ priceInformation['easyprice']['cpweb'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['cpa'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pa">{{ priceInformation['easyprice']['cpa_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['cpv'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_pv">{{ priceInformation['easyprice']['cpv_max'] || '-' }}</td>
+      <td *ngIf="(settings | async).search_summary_stock">
+        <i class="fa fa-circle-o-notch fa-spin text-info" *ngIf="isUpdatingStock"></i>
+        <i class="fa fa-times-circle-o text-danger" *ngIf="isUpdatingStockError"></i>
+        {{ stockInformation ? stockInformation.C : '' }}
+      </td>
+    </tr>
+  </tbody>
+</table>

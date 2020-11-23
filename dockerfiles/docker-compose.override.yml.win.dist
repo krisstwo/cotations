@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  webserver:
+    volumes:
+      - ..:/var/www/easy-price:delegated
+      - ./bin/webserver/site.conf:/etc/nginx/conf.d/site.conf:delegated
+      - ${LOG_DIR-./logs}/nginx:/var/log/nginx:delegated
+    depends_on:
+      - easy-price
+  easy-price:
+    volumes:
+      - ..:/var/www/easy-price:delegated
+      - ./bin/easy-price/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:delegated
+      - ${LOG_DIR-./logs}/php-fpm:/var/log/php-fpm:delegated
